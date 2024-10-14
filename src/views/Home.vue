@@ -2,6 +2,24 @@
 import Foods from '@/components/Foods.vue';
 import FoodMenu from '@/components/FoodMenu.vue';
 import SearchArea from '@/components/SearchArea.vue';
+import { onMounted, ref } from 'vue';
+
+const foods = ref([]);
+
+const fetchFoods = async () => {
+   try {
+        const response = await fetch('../../db/foods.json');
+        const data = await response.json();
+        // console.log(data);
+        foods.value = data;
+   } catch (error) {
+        console.log(error);
+   }
+};
+
+onMounted(() => {
+  fetchFoods();
+});
 </script>
 
 <template>
@@ -11,10 +29,10 @@ import SearchArea from '@/components/SearchArea.vue';
     <section class="categories">
         <div class="container">
             <h2 class="text-center">Explore Foods</h2>
-            
-            <Foods img="pizza.jpg" title="Pizza" slug="pizza"/>
-            <Foods img="burger.jpg" title="Burger" slug="burger"/>
-            <Foods img="momo.jpg" title="Momo" slug="momo"/>
+
+            <template v-for="food in foods">
+                <Foods :img="food.img" :title="food.title" :slug="food.slug"/>
+            </template>
 
             <div class="clearfix"></div>
         </div>
