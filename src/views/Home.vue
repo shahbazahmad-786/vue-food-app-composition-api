@@ -5,20 +5,31 @@ import SearchArea from '@/components/SearchArea.vue';
 import { onMounted, ref } from 'vue';
 
 const foods = ref([]);
+const foodMenus = ref([]);
 
 const fetchFoods = async () => {
    try {
         const response = await fetch('../../db/foods.json');
         const data = await response.json();
-        // console.log(data);
         foods.value = data;
    } catch (error) {
         console.log(error);
    }
 };
 
+const fetchFoodMenus = async () => {
+    try {
+        const response = await fetch('../../db/food-menu.json');
+        const data = await response.json();
+        foodMenus.value = data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 onMounted(() => {
   fetchFoods();
+  fetchFoodMenus();
 });
 </script>
 
@@ -44,52 +55,17 @@ onMounted(() => {
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
 
-            <FoodMenu 
-                src="menu-pizza.jpg"  
-                title="Food Title"
-                detail=" Made with Italian Sauce, Chicken, and organice vegetables."
-                :id="1"
-                :price="2.3"
-            />
-            <FoodMenu 
-                src="menu-burger.jpg"  
-                title="Smoky Burger"
-                detail=" Made with Italian Sauce, Chicken, and organice vegetables."
-                :id="2"
-                :price="2.3"
-            />
-            <FoodMenu 
-                src="menu-burger.jpg"  
-                title="Food Title"
-                detail=" Made with Italian Sauce, Chicken, and organice vegetables."
-                :id="3"
-                :price="2.6"
-            />
-            <FoodMenu 
-                src="menu-pizza.jpg"  
-                title="Food Title"
-                detail=" Made with Italian Sauce, Chicken, and organice vegetables."
-                :id="4"
-                :price="4.3"
-            />
-            <FoodMenu 
-                src="menu-burger.jpg"  
-                title="Food Title"
-                detail=" Made with Italian Sauce, Chicken, and organice vegetables."
-                :id="5"
-                :price="2.3"
-            />
-            <FoodMenu 
-                src="menu-pizza.jpg"  
-                title="Food Title"
-                detail=" Made with Italian Sauce, Chicken, and organice vegetables."
-                :id="6"
-                :price="2.5"
-            />
+            <template  v-for="{id,src,title,detail,price} in foodMenus">
+                <FoodMenu 
+                    :src="src"  
+                    :title="title"
+                    :detail="detail"
+                    :id="id"
+                    :price="price"
+                />
+            </template>
 
             <div class="clearfix"></div>
-
-
 
         </div>
 

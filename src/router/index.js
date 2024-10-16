@@ -8,6 +8,7 @@ import Order from '@/views/Order.vue';
 import CategoriesFoods from '@/views/CategoriesFoods.vue';
 import FoodSearch from '@/views/FoodSearch.vue';
 import NotFound from '@/views/NotFound.vue';
+import Test from '@/views/Test.vue';
 
 const routes = [
     {
@@ -48,6 +49,10 @@ const routes = [
                 path: "/:pathMatch(.*)",
                 name: "notfound",
                 component: NotFound,
+            },
+            {
+                path: "/test",
+                component: Test,
             },
         ]
     },
