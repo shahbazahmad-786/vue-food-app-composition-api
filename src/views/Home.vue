@@ -34,7 +34,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <SearchArea/>
+    <SearchArea />
 
     <!-- CAtegories Section Starts Here -->
     <section class="categories">
