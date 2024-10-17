@@ -2,7 +2,7 @@
     {
       "id": 1,
       "src": "menu-pizza.jpg",
-      "title": "Food Title",
+      "title": "Supreme Pizza",
       "detail": "Made with Italian Sauce, Chicken, and organic vegetables.",
       "price": 2.3
     },
@@ -16,28 +16,28 @@
     {
       "id": 3,
       "src": "menu-burger.jpg",
-      "title": "Food Title",
+      "title": "Fajita Pizza",
       "detail": "Made with Italian Sauce, Chicken, and organic vegetables.",
       "price": 2.6
     },
     {
       "id": 4,
       "src": "menu-pizza.jpg",
-      "title": "Food Title",
+      "title": "Cheez Pizza",
       "detail": "Made with Italian Sauce, Chicken, and organic vegetables.",
       "price": 4.3
     },
     {
       "id": 5,
       "src": "menu-burger.jpg",
-      "title": "Food Title",
+      "title": "Crispy Burger",
       "detail": "Made with Italian Sauce, Chicken, and organic vegetables.",
       "price": 2.3
     },
     {
       "id": 6,
       "src": "menu-pizza.jpg",
-      "title": "Food Title",
+      "title": "Mashroom Pizza",
       "detail": "Made with Italian Sauce, Chicken, and organic vegetables.",
       "price": 2.5
     }
