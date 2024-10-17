@@ -58,7 +58,7 @@ onMounted(() => {
           <legend>Selected Food</legend>
 
           <div class="food-menu-img">
-            <img :src="food.src" :alt="food.title" class="img-responsive img-curve" />
+            <img :src="`/images/${food.src}`" :alt="food.title" class="img-responsive img-curve" />
           </div>
 
           <div class="food-menu-desc">
