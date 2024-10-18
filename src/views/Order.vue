@@ -1,52 +1,94 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const food = ref({});
+
+const formData = ref({
+  fullName: '',
+  contact: '',
+  email: '',
+  address: '',
+  qty: 1,
+});
+
+const fetchFoodById = async (id) => {
+  try {
+    const response = await fetch('../../db/food-menu.json'); 
+    const foodMenus = await response.json();
+    const selectedFood = foodMenus.find(item => item.id === id); 
+    if (selectedFood) {
+      food.value = selectedFood;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Handle form submission
+const handleSubmit = (event) => {
+  event.preventDefault();
+  
+  const orderData = {
+    food: {
+      title: food.value.title,
+      price: food.value.price,
+      image: food.value.src,
+    },
+    ...formData.value,
+  };
+  
+  console.log('Order Data:', orderData); // Log order data in console
+};
+
+onMounted(() => {
+  const { id } = route.params;
+  fetchFoodById(Number(id)); // Fetch food by ID from the route param
+});
 </script>
 
 <template>
-    <!-- fOOD sEARCH Section Starts Here -->
-    <section class="food-search">
-        <div class="container">
-            
-            <h2 class="text-center text-white">Fill this form to confirm your order.</h2>
+  <section class="food-search">
+    <div class="container">
+      <h2 class="text-center text-white">Fill this form to confirm your order.</h2>
 
-            <form action="#" class="order">
-                <fieldset>
-                    <legend>Selected Food</legend>
+      <form @submit="handleSubmit" class="order">
+        <fieldset>
+          <legend>Selected Food</legend>
 
-                    <div class="food-menu-img">
-                        <img src="/images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                    </div>
-    
-                    <div class="food-menu-desc">
-                        <h3>Food Title</h3>
-                        <p class="food-price">$2.3</p>
+          <div class="food-menu-img">
+            <img :src="`/images/${food.src}`" :alt="food.title" class="img-responsive img-curve" />
+          </div>
 
-                        <div class="order-label">Quantity</div>
-                        <input type="number" name="qty" class="input-responsive" value="1" required>
-                        
-                    </div>
+          <div class="food-menu-desc">
+            <h3>{{ food.title }}</h3>
+            <p class="food-price">${{ food.price }}</p>
 
-                </fieldset>
-                
-                <fieldset>
-                    <legend>Delivery Details</legend>
-                    <div class="order-label">Full Name</div>
-                    <input type="text" name="full-name" placeholder="E.g. Vijay Thapa" class="input-responsive" required>
+            <div class="order-label">Quantity</div>
+            <input v-model="formData.qty" type="number" class="input-responsive" min="1" required />
+          </div>
+        </fieldset>
 
-                    <div class="order-label">Phone Number</div>
-                    <input type="tel" name="contact" placeholder="E.g. 9843xxxxxx" class="input-responsive" required>
+        <!-- Delivery Details -->
+        <fieldset>
+          <legend>Delivery Details</legend>
 
-                    <div class="order-label">Email</div>
-                    <input type="email" name="email" placeholder="E.g. hi@vijaythapa.com" class="input-responsive" required>
+          <div class="order-label">Full Name</div>
+          <input v-model="formData.fullName" type="text" placeholder="E.g. John Doe" class="input-responsive" required />
 
-                    <div class="order-label">Address</div>
-                    <textarea name="address" rows="10" placeholder="E.g. Street, City, Country" class="input-responsive" required></textarea>
+          <div class="order-label">Phone Number</div>
+          <input v-model="formData.contact" type="tel" placeholder="E.g. 1234567890" class="input-responsive" required />
 
-                    <input type="submit" name="submit" value="Confirm Order" class="btn btn-primary">
-                </fieldset>
+          <div class="order-label">Email</div>
+          <input v-model="formData.email" type="email" placeholder="E.g. email@example.com" class="input-responsive" required />
 
-            </form>
+          <div class="order-label">Address</div>
+          <textarea v-model="formData.address" rows="10" placeholder="E.g. Street, City, Country" class="input-responsive" required></textarea>
 
-        </div>
-    </section>
-    <!-- fOOD sEARCH Section Ends Here -->
+          <input type="submit" value="Confirm Order" class="btn btn-primary" />
+        </fieldset>
+      </form>
+    </div>
+  </section>
 </template>
