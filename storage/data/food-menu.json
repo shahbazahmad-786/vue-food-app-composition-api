@@ -1,0 +1,45 @@
+[
+    {
+      "id": 1,
+      "src": "menu-pizza.jpg",
+      "title": "Fajita Pizza",
+      "detail": "Made with Italian Sauce, Chicken, and organic vegetables.",
+      "price": 10
+    },
+    {
+      "id": 2,
+      "src": "menu-burger.jpg",
+      "title": "Smoky Burger",
+      "detail": "Made with Italian Sauce, Chicken, and organic vegetables.",
+      "price": 5
+    },
+    {
+      "id": 3,
+      "src": "menu-burger.jpg",
+      "title": "Fish Burger",
+      "detail": "Made with Italian Sauce, Chicken, and organic vegetables.",
+      "price": 7
+    },
+    {
+      "id": 4,
+      "src": "menu-pizza.jpg",
+      "title": "Crispy Pizza",
+      "detail": "Made with Italian Sauce, Chicken, and organic vegetables.",
+      "price": 9
+    },
+    {
+      "id": 5,
+      "src": "menu-burger.jpg",
+      "title": "Russiun Burger",
+      "detail": "Made with Italian Sauce, Chicken, and organic vegetables.",
+      "price": 2.3
+    },
+    {
+      "id": 6,
+      "src": "menu-pizza.jpg",
+      "title": "Cheez Pizza",
+      "detail": "Made with Italian Sauce, Chicken, and organic vegetables.",
+      "price": 2.5
+    }
+  ]
+  
