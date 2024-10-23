@@ -8,6 +8,8 @@ import Order from '@/views/Order.vue';
 import CategoriesFoods from '@/views/CategoriesFoods.vue';
 import FoodSearch from '@/views/FoodSearch.vue';
 import NotFound from '@/views/NotFound.vue';
+import Register from '@/views/auth/Register.vue';
+import Login from '@/views/auth/Login.vue';
 import Test from '@/views/Test.vue';
 
 const routes = [
@@ -55,6 +57,16 @@ const routes = [
                 component: Test,
             },
         ]
+    },
+    { 
+        path: '/register',
+        name:'Register',
+        component: Register
+    },
+    { 
+        path: '/login',
+        name:'Login',
+        component: Login
     },
 ]
 
