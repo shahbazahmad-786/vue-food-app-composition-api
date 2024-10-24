@@ -19,14 +19,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import router from "@/router";
+import store from "@/store";
 
 const login = {
-    email:'',
-    password:''
+  email:'',
+  password:''
 };
 
 const submit = () => {
-    console.log('Submit');
+  store.dispatch("login",login).then(()=>{
+    router.push({name:"Home"});
+  });
 };
 </script>
+
