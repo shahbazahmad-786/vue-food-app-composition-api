@@ -1,4 +1,13 @@
-<script setup></script>
+<script setup>
+import router from "@/router";
+import store from "@/store";
+
+const submit = () => {
+    store.dispatch("logout").then(() => {
+        router.push({ name: "Login" }); // Redirect to login page
+    });
+};
+</script>
 
 <template>
      <!-- Navbar Section Starts Here -->
@@ -24,6 +33,11 @@
                     <li>
                         <a href="https://github.com/shahbazahmad-786" target="__blank">About</a>
                     </li>
+                    <li>
+                        <form  @submit.prevent="submit">
+                            <input  type="submit" value="Logout">
+                        </form>
+                    </li>
                 </ul>
             </div>
 
@@ -31,4 +45,5 @@
         </div>
     </section>
     <!-- Navbar Section Ends Here -->
+
 </template>

@@ -122,6 +122,19 @@ fieldset {
     font-weight: bold;
 }
 
+.menu ul li form {
+    display: inline;
+    padding: 1%;
+    font-weight: bold;
+}
+.menu ul li form input{
+    display: inline;
+    padding: 1%;
+    font-weight: bold;
+    border:none;
+    color: #ff6b81;
+}
+
 
 /* CSS for Food SEarch Section */
 

@@ -1,7 +1,7 @@
 // import state from "./state";
 
 const setUSer = (state,data) => {
-    state.user.data = data;
+    state.user.data = data || null;
 };
 
 const setToken = (state,token) => {
@@ -20,5 +20,6 @@ const removeToken = (state) => {
 
 export {
     setUSer,
-    setToken
+    setToken,
+    removeToken
 }
