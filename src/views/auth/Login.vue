@@ -20,6 +20,8 @@
 
 <script setup>
 import { ref } from 'vue';
+import router from "@/router";
+import store from "@/store";
 
 const login = {
     email:'',
@@ -27,6 +29,8 @@ const login = {
 };
 
 const submit = () => {
-    console.log('Submit');
+  store.dispatch("login",login).then(()=>{
+    router.push({name:"Home"});
+  });
 };
 </script>

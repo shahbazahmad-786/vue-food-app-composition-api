@@ -68,6 +68,11 @@ const routes = [
         name:'Login',
         component: Login
     },
+    // { 
+    //     path: '/logout',
+    //     name:'Logout',
+    //     component: Login
+    // },
 ]
 
 const router = createRouter({

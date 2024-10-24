@@ -20,5 +20,6 @@ const removeToken = (state) => {
 
 export {
     setUSer,
-    setToken
+    setToken,
+    removeToken
 }

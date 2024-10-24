@@ -9,6 +9,26 @@ const register = ({commit},data) => {
     });
 }
 
+const login = ({commit},data) => {
+    return axiosClient.post("/login",data).then(({data})=>{
+        commit("setUser",data.user);
+        commit("setToken",data.token);
+
+        return data;
+    });
+}
+
+
+const logout = ({commit},data) => {
+    return axiosClient.post("/logout",data).then(({data})=>{
+        commit("setUser",null);
+        commit("setToken",null);
+
+        return data;
+    });
+}
 export {
-    register
+    register,
+    login,
+    logout
 }
