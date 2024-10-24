@@ -1,7 +1,5 @@
-/**
- * @author shahbazahmad0987654321@gmail.com on 20/10/2024.
- */
 
+import { createStore } from 'vuex'; 
 import axios from "axios";
 import store from "../store";
 import router from "../router";
