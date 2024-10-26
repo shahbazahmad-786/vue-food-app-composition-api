@@ -11,11 +11,15 @@ import NotFound from '@/views/NotFound.vue';
 import Register from '@/views/auth/Register.vue';
 import Login from '@/views/auth/Login.vue';
 import Test from '@/views/Test.vue';
+import store from '@/store';
 
 const routes = [
     {
         path:'/',
         component:Layout,
+        meta:{
+            auth:true
+        },
         children:[
             { 
                 path: '/',
@@ -61,18 +65,34 @@ const routes = [
     { 
         path: '/register',
         name:'Register',
-        component: Register
+        component: Register,
+        meta:{
+            guest:true
+        }
     },
     { 
         path: '/login',
         name:'Login',
-        component: Login
+        component: Login,
+        meta:{
+            guest:true
+        }
     },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to,from,next)=>{
+    if (to.meta.auth && !store.state.user.token) {
+        next({name:"Login"});
+    } else if (to.meta.guest && store.state.user.token){
+        next({name:"Home"});
+    } else {
+        next();
+    }
 });
 
 export default router;

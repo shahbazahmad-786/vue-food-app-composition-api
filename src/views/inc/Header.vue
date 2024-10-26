@@ -1,4 +1,11 @@
-<script setup></script>
+<script setup>
+import router from "@/router";
+import store from "@/store";
+
+function logout() {
+    store.dispatch("logout").then(()=> router.push({name:"Login"}));
+}
+</script>
 
 <template>
      <!-- Navbar Section Starts Here -->
@@ -23,6 +30,9 @@
                     </li>
                     <li>
                         <a href="https://github.com/shahbazahmad-786" target="__blank">About</a>
+                    </li>
+                    <li>
+                        <a href="#" @click="logout">Logout</a>
                     </li>
                 </ul>
             </div>
