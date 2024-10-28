@@ -27,8 +27,17 @@ const logout = ({commit}) => {
     });
 }
 
+const user = ({commit}) => {
+    return axiosClient.get("/user").then(({data})=>{
+        commit("setUser",data.user);
+
+        return data;
+    });
+};
+
 export {
     register,
     login,
-    logout
+    logout,
+    user
 }

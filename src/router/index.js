@@ -24,37 +24,44 @@ const routes = [
             { 
                 path: '/',
                 name:'Home',
-                component: Home
+                component: Home,
+                meta:{title:"Home"}
             },
             { 
                 path: '/categories',
                 name:'Categories',
-                component: Categories
+                component: Categories,
+                meta:{title:"Categories"}
             },
             { 
                 path: '/foods',
                 name:'Foods',
-                component: Foods
+                component: Foods,
+                meta:{title:"Foods"}
             },
             { 
                 path: '/order/:id',
                 name:'Order',
-                component: Order
+                component: Order,
+                meta:{title:"Order"}
             },
             { 
                 path: '/categories-foods/:slug',
                 name:'CategoriesFoods',
-                component: CategoriesFoods
+                component: CategoriesFoods,
+                meta:{title:"Categories Foods"}
             },
             { 
                 path: '/food-search/:search',
                 name:'FoodSearch',
-                component: FoodSearch
+                component: FoodSearch,
+                meta:{title:"Food Search"}
             },
             {
                 path: "/:pathMatch(.*)",
                 name: "notfound",
                 component: NotFound,
+                meta:{title:"Not Found"}
             },
             {
                 path: "/test",
@@ -67,7 +74,8 @@ const routes = [
         name:'Register',
         component: Register,
         meta:{
-            guest:true
+            guest:true,
+            title:"Register"
         }
     },
     { 
@@ -75,7 +83,8 @@ const routes = [
         name:'Login',
         component: Login,
         meta:{
-            guest:true
+            guest:true,
+            title:"Login"
         }
     },
     { 
@@ -98,6 +107,8 @@ router.beforeEach((to,from,next)=>{
     } else {
         next();
     }
+
+    document.title = to?.meta.title ? `${to.meta.title} | Food App` : 'Food App';
 });
 
 export default router;
