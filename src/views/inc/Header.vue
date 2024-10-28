@@ -1,12 +1,17 @@
 <script setup>
+import { computed, onMounted } from "vue";
 import router from "@/router";
 import store from "@/store";
 
-const submit = () => {
-  store.dispatch("logout").then(() => {
-    router.push({ name: "Login" });
-  });
-};
+const user = computed(()=> store.state.user.data);
+
+function logout() {
+    store.dispatch("logout").then(()=> router.push({name:"Login"}));
+}
+
+onMounted(() => {
+    store.dispatch("user")
+});
 </script>
 
 <template>
@@ -23,29 +28,28 @@ const submit = () => {
         </router-link>
       </div>
 
-      <div class="menu text-right">
-        <ul>
-          <li>
-            <router-link :to="{ name: 'Home' }">Home</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'Categories' }">Categories</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'Foods' }">Foods</router-link>
-          </li>
-          <li>
-            <a href="https://github.com/shahbazahmad-786" target="__blank"
-              >About</a
-            >
-          </li>
-          <li>
-            <form @submit.prevent="submit">
-              <input type="submit" value="Logout" />
-            </form>
-          </li>
-        </ul>
-      </div>
+            <div class="menu text-right">
+                <ul>
+                    <li>
+                        <router-link :to="{name:'Home'}">Home</router-link>
+                    </li>
+                    <li>
+                        <router-link :to="{name:'Categories'}">Categories</router-link>
+                    </li>
+                    <li>
+                        <router-link :to="{name:'Foods'}">Foods</router-link>
+                    </li>
+                    <li>
+                        <a href="https://github.com/shahbazahmad-786" target="__blank">About</a>
+                    </li>
+                    <li>
+                        <a href="#" @click="logout">Logout</a>
+                    </li>
+                    <li>
+                        <a href="#" style="cursor: default;">{{ user.name }}</a>
+                    </li>
+                </ul>
+            </div>
 
       <div class="clearfix"></div>
     </div>

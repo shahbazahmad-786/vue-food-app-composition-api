@@ -1,6 +1,6 @@
 // import state from "./state";
 
-const setUSer = (state,data) => {
+const setUser = (state,data) => {
     state.user.data = data;
 };
 
@@ -14,12 +14,7 @@ const setToken = (state,token) => {
     }
 };
 
-const removeToken = (state) => {
-    sessionStorage.removeItem("TOKEN");
-};
-
 export {
-    setUSer,
-    setToken,
-    removeToken
+    setUser,
+    setToken
 }

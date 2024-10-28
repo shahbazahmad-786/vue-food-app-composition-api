@@ -7,7 +7,6 @@ import store from '@/store';
 
 const foods = ref([]);
 const foodMenus = ref([]);
-const data = store.state.user;
 
 const fetchFoods = async () => {
    try {
@@ -42,7 +41,6 @@ onMounted(() => {
     <section class="categories">
         <div class="container">
             <h2 class="text-center">Explore Foods</h2>
-            {{ data }}
 
             <template v-for="food in foods">
                 <Foods :img="food.img" :title="food.title" :slug="food.slug"/>
