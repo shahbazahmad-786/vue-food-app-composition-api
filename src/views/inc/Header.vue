@@ -1,4 +1,18 @@
-<script setup></script>
+<script setup>
+import { computed, onMounted } from "vue";
+import router from "@/router";
+import store from "@/store";
+
+const user = computed(()=> store.state.user.data);
+
+function logout() {
+    store.dispatch("logout").then(()=> router.push({name:"Login"}));
+}
+
+onMounted(() => {
+    store.dispatch("user")
+});
+</script>
 
 <template>
      <!-- Navbar Section Starts Here -->
@@ -23,6 +37,12 @@
                     </li>
                     <li>
                         <a href="https://github.com/shahbazahmad-786" target="__blank">About</a>
+                    </li>
+                    <li>
+                        <a href="#" @click="logout">Logout</a>
+                    </li>
+                    <li>
+                        <a href="#" style="cursor: default;">{{ user.name }}</a>
                     </li>
                 </ul>
             </div>
