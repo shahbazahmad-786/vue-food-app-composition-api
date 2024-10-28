@@ -2,11 +2,9 @@
 import router from "@/router";
 import store from "@/store";
 
-const submit = () => {
-    store.dispatch("logout").then(() => {
-        router.push({ name: "Login" }); // Redirect to login page
-    });
-};
+function logout() {
+    store.dispatch("logout").then(()=> router.push({name:"Login"}));
+}
 </script>
 
 <template>
@@ -34,9 +32,12 @@ const submit = () => {
                         <a href="https://github.com/shahbazahmad-786" target="__blank">About</a>
                     </li>
                     <li>
-                        <form  @submit.prevent="submit">
-                            <input  type="submit" value="Logout">
-                        </form>
+
+                        <a href="#" @click="logout">Logout</a>
+
+                    </li>
+                    <li>
+                        <a href="#" @click="logout">Logout</a>
                     </li>
                 </ul>
             </div>
