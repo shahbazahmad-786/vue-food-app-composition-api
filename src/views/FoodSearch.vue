@@ -2,7 +2,7 @@
 import FoodMenu from '@/components/FoodMenu.vue';
 import SearchBanner from '@/components/SearchBanner.vue';
 import { useRoute } from 'vue-router';
-import { ref,onMounted } from 'vue';
+import { ref,onMounted,provide } from 'vue';
 
 const route = useRoute();
 const search = route.params.search;
