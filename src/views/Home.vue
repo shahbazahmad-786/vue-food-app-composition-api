@@ -2,11 +2,12 @@
 import Foods from '@/components/Foods.vue';
 import FoodMenu from '@/components/FoodMenu.vue';
 import SearchArea from '@/components/SearchArea.vue';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref,provide } from 'vue';
 import store from '@/store';
 
 const foods = ref([]);
 const foodMenus = ref([]);
+provide('message','web penter');
 
 const fetchFoods = async () => {
    try {
