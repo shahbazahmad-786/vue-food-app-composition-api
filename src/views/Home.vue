@@ -1,13 +1,22 @@
 <script setup>
-import Foods from '@/components/Foods.vue';
-import FoodMenu from '@/components/FoodMenu.vue';
+// import Foods from '@/components/Foods.vue';
+// import FoodMenu from '@/components/FoodMenu.vue';
 import SearchArea from '@/components/SearchArea.vue';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref,provide, defineAsyncComponent } from 'vue';
 import store from '@/store';
+
+
+
+const Foods = defineAsyncComponent(()=>
+import('@/components/Foods.vue')
+);
+const FoodMenu = defineAsyncComponent(()=>
+import('@/components/FoodMenu.vue')
+);
 
 const foods = ref([]);
 const foodMenus = ref([]);
-const data = store.state.user;
+provide('message','web penter');
 
 const fetchFoods = async () => {
    try {
@@ -42,7 +51,6 @@ onMounted(() => {
     <section class="categories">
         <div class="container">
             <h2 class="text-center">Explore Foods</h2>
-            {{ data }}
 
             <template v-for="food in foods">
                 <Foods :img="food.img" :title="food.title" :slug="food.slug"/>

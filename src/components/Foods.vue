@@ -1,4 +1,5 @@
 <script setup>
+import DeepChildComponent from './DeepChildComponent.vue';
 const props = defineProps(['img','title','slug']);
 </script>
 
@@ -10,5 +11,5 @@ const props = defineProps(['img','title','slug']);
                     <h3 class="float-text text-white">{{ title }}</h3>
                 </div>
             </router-link>
+            <deep-child-component/>
 </template>
-

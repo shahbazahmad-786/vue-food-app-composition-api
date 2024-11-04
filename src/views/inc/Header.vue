@@ -1,14 +1,17 @@
 <script setup>
+import { computed, onMounted } from "vue";
 import router from "@/router";
 import store from "@/store";
 
+const user = computed(()=> store.state.user.data);
 
+function logout() {
+    store.dispatch("logout").then(()=> router.push({name:"Login"}));
+}
 
-const submit = () => {
-  store.dispatch("logout").then(()=>{
-    router.push({name:"Login"});
-  });
-};
+onMounted(() => {
+    store.dispatch("user")
+});
 </script>
 
 <template>
@@ -36,11 +39,11 @@ const submit = () => {
                         <a href="https://github.com/shahbazahmad-786" target="__blank">About</a>
                     </li>
                     <li>
-                    <form @submit.prevent="submit" >
-                        
-                        <input type="submit" value="Logout">
-                    </form>
-                </li>
+                        <a href="#" @click="logout">Logout</a>
+                    </li>
+                    <li>
+                        <a href="#" style="cursor: default;">{{ user.name }}</a>
+                    </li>
                 </ul>
             </div>
 
