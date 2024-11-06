@@ -2,12 +2,12 @@
 import Foods from '@/components/Foods.vue';
 import FoodMenu from '@/components/FoodMenu.vue';
 import SearchArea from '@/components/SearchArea.vue';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref,provide } from 'vue';
 import store from '@/store';
 
 const foods = ref([]);
 const foodMenus = ref([]);
-const data = store.state.user;
+provide('message','web penter');
 
 const fetchFoods = async () => {
    try {
@@ -42,7 +42,6 @@ onMounted(() => {
     <section class="categories">
         <div class="container">
             <h2 class="text-center">Explore Foods</h2>
-           
 
             <template v-for="food in foods">
                 <Foods :img="food.img" :title="food.title" :slug="food.slug"/>
