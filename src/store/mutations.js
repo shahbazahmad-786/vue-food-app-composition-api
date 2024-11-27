@@ -4,6 +4,10 @@ const setUser = (state,data) => {
     state.user.data = data;
 };
 
+const setFoods = (state,data) => {
+    state.foods.data = data;
+};
+
 const setToken = (state,token) => {
     state.user.token = token;
 
@@ -16,5 +20,6 @@ const setToken = (state,token) => {
 
 export {
     setUser,
+    setFoods,
     setToken
 }

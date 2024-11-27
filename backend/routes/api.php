@@ -10,10 +10,10 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/foods', [FoodController::class, 'index'])->middleware('auth:sanctum');
-Route::post('/store', [FoodController::class, 'store']);
+Route::post('/store', [FoodController::class, 'store'])->middleware('auth:sanctum');
 
-Route::get('/foodmenu', [FoodMenuController::class, 'index']);
-Route::post('/foodmenustore', [FoodMenuController::class, 'store']);
+Route::get('/foodmenu', [FoodMenuController::class, 'index'])->middleware('auth:sanctum');
+Route::post('/foodmenustore', [FoodMenuController::class, 'store'])->middleware('auth:sanctum');
 
 // Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');

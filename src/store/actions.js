@@ -35,9 +35,17 @@ const user = ({commit}) => {
     });
 };
 
+const foods = ({ commit }) => {
+    return axiosClient.get("/foods").then(({ data }) => {
+        console.log('Fetched data:', data);  // Add this line for debugging
+        commit("setFoods", data.food);
+        return data;
+    });
+};
 export {
     register,
     login,
     logout,
-    user
+    user,
+    foods
 }

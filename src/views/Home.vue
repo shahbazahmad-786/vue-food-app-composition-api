@@ -2,78 +2,78 @@
 import Foods from '@/components/Foods.vue';
 import FoodMenu from '@/components/FoodMenu.vue';
 import SearchArea from '@/components/SearchArea.vue';
-import { onMounted, ref,provide } from 'vue';
-import store from '@/store';
+import { onMounted, computed, ref, provide } from 'vue';
+import { useStore } from 'vuex'; // Use the Vuex store
 
-const foods = ref([]);
-const foodMenus = ref([]);
-provide('message','web penter');
+const store = useStore(); // Use the Vuex store instance
 
-const fetchFoods = async () => {
-   try {
-        const response = await fetch('../../db/foods.json');
-        const data = await response.json();
-        foods.value = data;
-   } catch (error) {
-        console.log(error);
-   }
-};
+// Fetch foods from Vuex store when the component is mounted
+onMounted(() => {
+  store.dispatch('foods'); // Trigger the foods action to fetch data
+});
 
+// Map the foods state from Vuex to a computed property
+const foods = computed(() => store.state.foods.data);
+
+const foodMenus = ref([]); // Local state for food menus
+
+provide('message', 'web penter'); // Provide message
+
+// Fetch food menus from a local JSON file
 const fetchFoodMenus = async () => {
-    try {
-        const response = await fetch('../../db/food-menu.json');
-        const data = await response.json();
-        foodMenus.value = data;
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const response = await fetch('../../db/food-menu.json');
+    const data = await response.json();
+    foodMenus.value = data;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 onMounted(() => {
-  fetchFoods();
   fetchFoodMenus();
 });
 </script>
 
 <template>
-    <SearchArea/>
+  <SearchArea/>
 
-    <!-- CAtegories Section Starts Here -->
-    <section class="categories">
-        <div class="container">
-            <h2 class="text-center">Explore Foods</h2>
+  <!-- Categories Section Starts Here -->
+  <section class="categories">
+    <div class="container">
+      <h2 class="text-center">Explore Foods</h2>
 
-            <template v-for="food in foods">
-                <Foods :img="food.img" :title="food.title" :slug="food.slug"/>
-            </template>
+      <!-- Loop through foods and pass props to Foods component -->
+      <template v-for="food in foods" :key="food.id">
+        <Foods :img="food.img" :title="food.title" :slug="food.slug" />
+      </template>
 
-            <div class="clearfix"></div>
-        </div>
-    </section>
-    <!-- Categories Section Ends Here -->
+      <div class="clearfix"></div>
+    </div>
+  </section>
+  <!-- Categories Section Ends Here -->
 
-    <!-- fOOD MEnu Section Starts Here -->
-    <section class="food-menu">
-        <div class="container">
-            <h2 class="text-center">Food Menu</h2>
+  <!-- Food Menu Section Starts Here -->
+  <section class="food-menu">
+    <div class="container">
+      <h2 class="text-center">Food Menu</h2>
 
-            <template  v-for="{id,src,title,detail,price} in foodMenus">
-                <FoodMenu 
-                    :src="src"  
-                    :title="title"
-                    :detail="detail"
-                    :id="id"
-                    :price="price"
-                />
-            </template>
+      <template v-for="{ id, src, title, detail, price } in foodMenus" :key="id">
+        <FoodMenu 
+          :src="src"  
+          :title="title"
+          :detail="detail"
+          :id="id"
+          :price="price"
+        />
+      </template>
 
-            <div class="clearfix"></div>
+      <div class="clearfix"></div>
+    </div>
 
-        </div>
-
-        <p class="text-center">
-            <a href="#">See All Foods</a>
-        </p>
-    </section>
-    <!-- fOOD Menu Section Ends Here -->
+    <p class="text-center">
+      <a href="#">See All Foods</a>
+    </p>
+  </section>
+  <!-- Food Menu Section Ends Here -->
 </template>
