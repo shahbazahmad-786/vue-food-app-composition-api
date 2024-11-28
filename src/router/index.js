@@ -87,6 +87,11 @@ const routes = [
             title:"Login"
         }
     },
+    // { 
+    //     path: '/logout',
+    //     name:'Logout',
+    //     component: Login
+    // },
 ]
 
 const router = createRouter({

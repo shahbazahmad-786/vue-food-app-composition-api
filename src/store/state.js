@@ -2,6 +2,7 @@ export default {
     user:{
         token:sessionStorage.getItem("TOKEN"),
         data:{},
+
     },
     foods:{
         data:[],
@@ -11,4 +12,5 @@ export default {
         data:[],
         loading:false
     },
+
 }

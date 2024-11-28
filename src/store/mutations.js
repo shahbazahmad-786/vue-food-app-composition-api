@@ -9,8 +9,6 @@ const setToken = (state,token) => {
         sessionStorage.setItem("TOKEN",token);
     } else {
         sessionStorage.removeItem("TOKEN");
-    }
-};
 
 const setFoods = (state,[data,loading]) => {
     state.foods.data = data;
@@ -27,4 +25,5 @@ export {
     setToken,
     setFoods,
     setFoodMenus,
+
 }

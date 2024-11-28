@@ -5,9 +5,11 @@ import { onMounted, ref,provide, defineAsyncComponent, computed } from 'vue';
 import store from '@/store';
 import Loader from '@/components/Loader.vue';
 
+
 const Foods = defineAsyncComponent(()=>
 import('@/components/Foods.vue')
 );
+
 
 const foods = computed(() => store.state.foods);
 const foodMenus = computed(() => store.state.foodMenus);

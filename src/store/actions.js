@@ -34,6 +34,7 @@ const user = ({commit}) => {
     });
 };
 
+
 const foods = ({commit}) => {
     commit("setFoods",[[],true]);
     return axiosClient.get("/foods").then(({data})=>{
@@ -56,7 +57,9 @@ export {
     register,
     login,
     logout,
+
     user,
     foods,
     foodMenus,
+
 }
