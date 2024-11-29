@@ -1,6 +1,14 @@
 export default {
     user:{
         token:sessionStorage.getItem("TOKEN"),
-        data:{}
-    }
+        data:{},
+    },
+    foods:{
+        data:[],
+        loading:false
+    },
+    foodMenus:{
+        data:[],
+        loading:false
+    },
 }

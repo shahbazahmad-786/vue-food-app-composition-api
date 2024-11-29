@@ -1,29 +1,30 @@
-const setUser = (state, data) => {
-    // Ensure state.user is initialized
-    if (!state.user) {
-        state.user = {};
-    }
+const setUser = (state,data) => {
     state.user.data = data;
 };
 
-const setToken = (state, access_token) => {
-    state.user.access_token = access_token;
+const setToken = (state,token) => {
+    state.user.token = token;
 
-    // Store token in sessionStorage
-    if (access_token) {
-        sessionStorage.setItem("TOKEN", access_token);
+    if (token) {
+        sessionStorage.setItem("TOKEN",token);
     } else {
         sessionStorage.removeItem("TOKEN");
     }
 };
 
-const removeToken = (state) => {
-    state.user.access_token = null; // Clear the access token in the state
-    sessionStorage.removeItem("TOKEN"); // Remove token from sessionStorage
-};
+const setFoods = (state,[data,loading]) => {
+    state.foods.data = data;
+    state.foods.loading = loading;
+}; 
+
+const setFoodMenus = (state,[data,loading]) => {
+    state.foodMenus.data = data;
+    state.foodMenus.loading = loading;
+}; 
 
 export {
     setUser,
     setToken,
-    removeToken, 
-};
+    setFoods,
+    setFoodMenus,
+}
