@@ -52,6 +52,15 @@ const foodMenus = ({commit}) => {
     });
 };
 
+const foodMenusByFood = ({commit},slug) => {
+    commit("setFoodMenus",[[],true]);
+    return axiosClient.get(`/food-menus/${slug}`).then(({data})=>{
+        commit("setFoodMenus",[data,false]);
+
+        return data;
+    });
+};
+
 export {
     register,
     login,
@@ -59,4 +68,5 @@ export {
     user,
     foods,
     foodMenus,
+    foodMenusByFood
 }

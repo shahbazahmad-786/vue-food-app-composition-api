@@ -17,6 +17,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Foods
     Route::post('/foods', [FoodController::class, 'create']);
     Route::get('/foods', [FoodController::class, 'index']);
+    Route::get('/food-menus/{id}', [FoodController::class, 'foodMenusByFood']);
 
     // Food-Menu
     Route::post('/food-menues', [FoodMenuController::class, 'create']);
