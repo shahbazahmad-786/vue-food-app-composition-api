@@ -10,5 +10,9 @@ class Food extends Model
 {
     use HasFactory,HasApiTokens;
 
-    protected $fillable = ['img', 'title', 'slug'];
+    protected $fillable = ['img', 'title', 'slug','food_id'];
+
+    public function foodMenus() {
+        return $this->hasMany(FoodMenue::class);
+    }
 }

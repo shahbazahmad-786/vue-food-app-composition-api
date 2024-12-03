@@ -16,6 +16,13 @@ class FoodController extends Controller
         return response()->json($foods);
     }
 
+    public function foodMenusByFood($slug) {
+        $foodMenus = Food::where('slug',$slug)->first();
+
+        return response()->json($foodMenus->foodMenus);
+
+    }
+
     // Method to create a new food with image upload
     public function create(Request $request)
     {

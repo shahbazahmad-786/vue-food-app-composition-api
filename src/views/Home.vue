@@ -4,6 +4,7 @@ import SearchArea from '@/components/SearchArea.vue';
 import { onMounted, ref,provide, defineAsyncComponent, computed } from 'vue';
 import store from '@/store';
 import Loader from '@/components/Loader.vue';
+console.log(store.state.user.token)
 
 const Foods = defineAsyncComponent(()=>
 import('@/components/Foods.vue')
