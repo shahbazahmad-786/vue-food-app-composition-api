@@ -1,34 +1,27 @@
 <script setup>
 import Foods from '@/components/Foods.vue';
+import store from '@/store';
+import Loader from '@/components/Loader.vue';
 
-import { ref,onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 
-const foods = ref([]);
+const foods = computed(() => store.state.foods);
 
-const fetchFoods = async () => {
-    try {
-        const response = await fetch('../../db/foods.json');
-        const data = await response.json();
-        foods.value = data;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-onMounted(() => {
-  fetchFoods();
-});
+onMounted(() => store.dispatch("foods"));
 </script>
 
 <template>
-    <!-- CAtegories Section Starts Here -->
+    <!-- Categories Section Starts Here -->
     <section class="categories">
         <div class="container">
             <h2 class="text-center">Explore Foods</h2>
 
-            <template v-for="{img,title,slug} in foods">
-                <Foods :img="img" :title="title" :slug="slug"/>
+            <!-- Corrected v-for loop -->
+            <template v-for="food in foods.data" :key="food.slug">
+                <Foods :img="food.img" :title="food.title" :slug="food.slug"/>
             </template>
+
+            <Loader v-if="foods.loading" style="margin-block: 100px;"/>
 
             <div class="clearfix"></div>
         </div>

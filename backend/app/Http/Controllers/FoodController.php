@@ -2,45 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Food;
 use Illuminate\Http\Request;
+use App\Models\Food;
+use Illuminate\Support\Str;
 
 class FoodController extends Controller
 {
+    // Method to fetch all foods
     public function index()
     {
-        $food = Food::all();
+        $foods = Food::all();
 
-        return response()->json([
-            'message' => 'Food fetched successfully',
-            'food' => $food,
-        ], 200);  // Changed status code to 200, as 201 is typically used for resource creation.
+        return response()->json($foods);
     }
 
-    public function store(Request $request)
+    // Method to create a new food with image upload
+    public function create(Request $request)
     {
-        // Validate the request
         $request->validate([
-            'img' => 'required|image|max:2048',
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'title' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
         ]);
 
-        // Store the image
-        $path = $request->file('img')->store('public/images');
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $imagePath = $file->store('foods', 'public');
+            $imageUrl = url('storage/' . $imagePath);
+        } else {
+            return response()->json(['error' => 'Image upload failed'], 400);
+        }
 
-        // Save the file path to the database
+        $slug = Str::slug($request->title);
+
+        $existingSlugCount = Food::where('slug', 'like', $slug . '%')->count();
+        if ($existingSlugCount > 0) {
+            $slug .= '-' . ($existingSlugCount + 1);
+        }
+
         $food = Food::create([
-            'img' => $path, // Store the file path
+            'img' => $imageUrl,
             'title' => $request->title,
-            'slug' => $request->slug,
+            'slug' => $slug,
         ]);
 
-        return response()->json([
-            'message' => 'Food inserted successfully',
-            'food' => $food,
-        ], 200);
-
-        // return redirect()->back()->with('success', 'Food item created successfully.');
+        return response()->json($food,201);
 }
+
 }

@@ -1,50 +1,39 @@
 <script setup>
 import FoodMenu from '@/components/FoodMenu.vue';
+import Loader from '@/components/Loader.vue';
 import SearchArea from '@/components/SearchArea.vue';
+import store from '@/store';
 
-import { ref,onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 
-const foodMenus = ref([]);
+const foodMenus = computed(() => store.state.foodMenus);
 
-const fetchFoodMenus = async () => {
-    try {
-        const response = await fetch('../../db/food-menu.json');
-        const data = await response.json();
-        foodMenus.value = data;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-onMounted(() => {
-  fetchFoodMenus();
-});
+onMounted(() => store.dispatch("foodMenus"));
 </script>
 
 <template>
     <SearchArea/>
 
-    <!-- fOOD MEnu Section Starts Here -->
+    <!-- Food Menu Section Starts Here -->
     <section class="food-menu">
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
 
-            <template  v-for="{id,src,title,detail,price} in foodMenus">
+            <!-- Corrected v-for loop -->
+            <template v-for="foodMenu in foodMenus.data" :key="foodMenu.id">
                 <FoodMenu 
-                    :src="src"  
-                    :title="title"
-                    :detail="detail"
-                    :id="id"
-                    :price="price"
+                    :src="foodMenu.src"  
+                    :title="foodMenu.title"
+                    :details="foodMenu.details"
+                    :id="foodMenu.id"
+                    :price="foodMenu.price"
                 />
             </template>
 
+            <Loader v-if="foodMenus.loading" style="margin-top: 80px;"/>
+
             <div class="clearfix"></div>
-
-            
-
         </div>
-
     </section>
-    <!-- fOOD Menu Section Ends Here -->
+    <!-- Food Menu Section Ends Here -->
 </template>

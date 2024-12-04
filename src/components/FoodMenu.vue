@@ -15,7 +15,7 @@ const props = defineProps({
                 </div>
 
                 <div class="food-menu-desc">
-                    <h4>{{ title }}</h4>
+                    <h4 style="text-transform: capitalize;" >{{ title }}</h4>
                     <p class="food-price">${{ price }}</p>
                     <p class="food-detail">{{ detail }}</p>
                     <br>

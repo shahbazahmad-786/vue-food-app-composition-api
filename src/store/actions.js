@@ -33,10 +33,30 @@ const user = ({commit}) => {
         return data;
     });
 };
+const foods = ({commit}) =>{
+    commit("setFoods",[[],true]);
+    return axiosClient.get("/foods").then(({data})=>{
+        commit("setFoods",[data,false]);
+
+        return data;
+    });
+};
+const foodMenus = ({commit}) =>{
+    commit("setFoodMenus",[[],true]);
+    return axiosClient.get("/food-menues").then(({data})=>{
+        commit("setFoodMenus",[data,false]);
+
+        return data;
+    });
+};
 
 export {
     register,
     login,
     logout,
-    user
+    user,
+    foods,
+    foodMenus,
+
+
 }

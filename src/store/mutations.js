@@ -1,5 +1,3 @@
-// import state from "./state";
-
 const setUser = (state,data) => {
     state.user.data = data;
 };
@@ -14,7 +12,19 @@ const setToken = (state,token) => {
     }
 };
 
+const setFoods = (state,[data,loading]) => {
+    state.foods.data = data;
+    state.foods.loading = loading;
+}; 
+
+const setFoodMenus = (state,[data,loading]) => {
+    state.foodMenus.data = data;
+    state.foodMenus.loading = loading;
+}; 
+
 export {
     setUser,
-    setToken
+    setToken,
+    setFoods,
+   setFoodMenus,
 }

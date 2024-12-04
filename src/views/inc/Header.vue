@@ -5,6 +5,12 @@ import store from "@/store";
 
 const user = computed(()=> store.state.user.data);
 
+const navLinks = [
+    {to:'Home',name:'Home'},
+    {to:'Categories',name:'Categories'},
+    {to:'Foods',name:'Foods'},
+];
+
 function logout() {
     store.dispatch("logout").then(()=> router.push({name:"Login"}));
 }
@@ -26,15 +32,10 @@ onMounted(() => {
 
             <div class="menu text-right">
                 <ul>
-                    <li>
-                        <router-link :to="{name:'Home'}">Home</router-link>
-                    </li>
-                    <li>
-                        <router-link :to="{name:'Categories'}">Categories</router-link>
-                    </li>
-                    <li>
-                        <router-link :to="{name:'Foods'}">Foods</router-link>
-                    </li>
+                    <li v-for="(nav, index) in navLinks" :key="index">
+    <router-link :to="{name: nav.to}">{{ nav.name }}</router-link>
+</li>
+
                     <li>
                         <a href="https://github.com/shahbazahmad-786" target="__blank">About</a>
                     </li>

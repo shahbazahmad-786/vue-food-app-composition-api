@@ -22,4 +22,7 @@ const search = ref('');
 const submit = () => {
     router.push({name:'FoodSearch',params:{search:search.value}});
 };
+ const vFoces ={
+    mounted: (e) => e.foces()
+ }
 </script>
