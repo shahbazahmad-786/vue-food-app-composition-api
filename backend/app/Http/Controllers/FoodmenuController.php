@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FoodMenu;
 use Illuminate\Http\Request;
 use App\Models\FoodMenue;
 
-class FoodmenuController extends Controller
+class FoodMenuController extends Controller
 {
     // Method to fetch all foods
     public function index()
     {
-        $foods = FoodMenu::all();
+        $foods = FoodMenue::all();
 
         return response()->json($foods);
     }
@@ -34,13 +33,13 @@ class FoodmenuController extends Controller
             return response()->json(['error' => 'Image upload failed'], 400);
         }
 
-        $food = FoodMenu::create([
+        $food = FoodMenue::create([
             'src' => $imageUrl,
             'title' => $request->title,
             'details' => $request->details,
             'price' => $request->price,
         ]);
 
-        return response()->json($food,201);
-}
+        return response()->json($food, 201);
+    }
 }
