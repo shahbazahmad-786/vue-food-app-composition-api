@@ -4,7 +4,7 @@
         <div class="container">
 
             <form @submit.prevent="submit">
-                <input v-model="search" type="search" name="search" placeholder="Search for Food.." required>
+                <input v-model="search" v-focus type="search" name="search" placeholder="Search for Food.." required>
                 <input type="submit" name="submit" value="Search" class="btn btn-primary">
             </form>
 
@@ -22,7 +22,8 @@ const search = ref('');
 const submit = () => {
     router.push({name:'FoodSearch',params:{search:search.value}});
 };
- const vFoces ={
-    mounted: (e) => e.foces()
- }
+
+const vFocus = {
+    mounted: (e) => e.focus()
+}
 </script>

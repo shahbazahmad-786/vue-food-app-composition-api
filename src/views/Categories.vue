@@ -3,9 +3,9 @@ import Foods from '@/components/Foods.vue';
 import store from '@/store';
 import Loader from '@/components/Loader.vue';
 
-import { onMounted, computed } from 'vue';
+import { ref,onMounted, computed } from 'vue';
 
-const foods = computed(() => store.state.foods);
+const foods = computed(() => store.state.foods)
 
 onMounted(() => store.dispatch("foods"));
 </script>
@@ -16,9 +16,8 @@ onMounted(() => store.dispatch("foods"));
         <div class="container">
             <h2 class="text-center">Explore Foods</h2>
 
-            <!-- Corrected v-for loop -->
-            <template v-for="food in foods.data" :key="food.slug">
-                <Foods :img="food.img" :title="food.title" :slug="food.slug"/>
+            <template v-for="{img,title,slug} in foods.data">
+                <Foods :img="img" :title="title" :slug="slug"/>
             </template>
 
             <Loader v-if="foods.loading" style="margin-block: 100px;"/>

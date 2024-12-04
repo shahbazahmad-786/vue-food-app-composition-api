@@ -6,13 +6,12 @@ export default {
         token:sessionStorage.getItem("TOKEN"),
         data:{},
     },
-    Foods:{
+    foods:{
         data:[],
-        loading:false,
+        loading:false
     },
-    FoodMenus:{
+    foodMenus:{
         data:[],
-        loading:false,
+        loading:false
     },
-
 }

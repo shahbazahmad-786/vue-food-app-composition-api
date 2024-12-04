@@ -1,20 +1,19 @@
 <script setup>
 import FoodMenu from '@/components/FoodMenu.vue';
 import SearchArea from '@/components/SearchArea.vue';
-import { onMounted, ref, provide, defineAsyncComponent, computed } from 'vue';
+import { onMounted, ref,provide, defineAsyncComponent, computed } from 'vue';
 import store from '@/store';
 import Loader from '@/components/Loader.vue';
+console.log(store.state.user.token)
 
-const Foods = defineAsyncComponent(() =>
-  import('@/components/Foods.vue')
+const Foods = defineAsyncComponent(()=>
+import('@/components/Foods.vue')
 );
 
-// const foods = computed(() => store.state.foods);
-const foods = store.state.foods;
-console.log(foods.data);
+const foods = computed(() => store.state.foods);
 const foodMenus = computed(() => store.state.foodMenus);
 
-provide('message', 'web penter');
+provide('message','web penter');
 
 onMounted(() => {
   store.dispatch("foods");
@@ -23,18 +22,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <SearchArea />
-  
-  <!-- Categories Section Starts Here -->
-  <section class="categories">
-    <div class="container">
-      <h2 class="text-center">Explore Foods</h2>
+    <SearchArea/>
+    <!-- CAtegories Section Starts Here -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="text-center">Explore Foods</h2>
 
-      <template v-for="food in foods.data" :key="food.slug">
-        <Foods :img="food.img" :title="food.title" :slug="food.slug" />
-      </template>
+            <template v-for="food in foods.data">
+                <Foods :img="food.img" :title="food.title" :slug="food.slug"/>
+            </template>
 
-      <Loader v-if="foods.loading" style="margin-top: 80px;" />
+            <Loader v-if="foods.loading" style="margin-top: 80px;"/>
 
       <div class="clearfix"></div>
     </div>
@@ -46,25 +44,25 @@ onMounted(() => {
     <div class="container">
       <h2 class="text-center">Food Menu</h2>
 
-      <template v-for="foodMenu in foodMenus.data" :key="foodMenu.id">
-        <FoodMenu 
-          :src="foodMenu.src"  
-          :title="foodMenu.title"
-          :details="foodMenu.details"
-          :id="foodMenu.id"
-          :price="foodMenu.price"
-        />
-      </template>
+            <template  v-for="{id,src,title,details,price} in foodMenus.data">
+                <FoodMenu 
+                    :src="src"  
+                    :title="title"
+                    :details="details"
+                    :id="id"
+                    :price="price"
+                />
+            </template>
 
-      <Loader v-if="foodMenus.loading" style="margin-top: 80px;" />
+            <Loader v-if="foodMenus.loading" style="margin-top: 80px;"/>
 
       <div class="clearfix"></div>
 
     </div>
 
-    <p class="text-center" v-if="!foodMenus.loading">
-      <router-link :to="{ name: 'Foods' }">See All Foods</router-link>
-    </p>
-  </section>
-  <!-- Food Menu Section Ends Here -->
+        <p class="text-center" v-if="!foodMenus.loading">
+            <router-link :to="{name:'Foods'}">See All Foods</router-link>
+        </p>
+    </section>
+    <!-- fOOD Menu Section Ends Here -->
 </template>

@@ -32,10 +32,9 @@ onMounted(() => {
 
             <div class="menu text-right">
                 <ul>
-                    <li v-for="(nav, index) in navLinks" :key="index">
-    <router-link :to="{name: nav.to}">{{ nav.name }}</router-link>
-</li>
-
+                    <li v-for="nav in navLinks">
+                        <router-link :to="{name:nav.to}">{{ nav.name }}</router-link>
+                    </li>
                     <li>
                         <a href="https://github.com/shahbazahmad-786" target="__blank">About</a>
                     </li>

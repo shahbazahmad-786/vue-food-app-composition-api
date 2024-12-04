@@ -1,18 +1,18 @@
 <script setup>
 import FoodMenu from '@/components/FoodMenu.vue';
 import SearchBanner from '@/components/SearchBanner.vue';
+import Loader from '@/components/Loader.vue';
 import { useRoute } from 'vue-router';
-import {computed, ref,onMounted } from 'vue';
+import { onMounted,computed } from 'vue';
 import store from '@/store';
 
 const route = useRoute();
 const slug = route.params.slug;
 
 const foodMenus = computed(() => store.state.foodMenus);
-onMounted(() =>{
-    if (!foodMenus.value.data){
-        store.dispatch('foodMenus', "burgers");
-    }
+
+onMounted(() => {
+    store.dispatch("foodMenusByFood",slug);
 });
 </script>
 
@@ -26,15 +26,17 @@ onMounted(() =>{
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
 
-            <template  v-for="{id,src,title,detail,price} in foodMenus.data">
+            <template  v-for="{id,src,title,details,price} in foodMenus.data">
                 <FoodMenu 
                     :src="src"  
                     :title="title"
-                    :detail="detail"
+                    :details="details"
                     :id="id"
                     :price="price"
                 />
             </template>
+
+            <Loader v-if="foodMenus.loading" style="margin-top: 80px;"/>
 
 
             <div class="clearfix"></div>

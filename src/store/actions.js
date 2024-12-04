@@ -33,7 +33,8 @@ const user = ({commit}) => {
         return data;
     });
 };
-const foods = ({commit}) =>{
+
+const foods = ({commit}) => {
     commit("setFoods",[[],true]);
     return axiosClient.get("/foods").then(({data})=>{
         commit("setFoods",[data,false]);
@@ -41,9 +42,19 @@ const foods = ({commit}) =>{
         return data;
     });
 };
-const foodMenus = ({commit}) =>{
+
+const foodMenus = ({commit}) => {
     commit("setFoodMenus",[[],true]);
     return axiosClient.get("/food-menues").then(({data})=>{
+        commit("setFoodMenus",[data,false]);
+
+        return data;
+    });
+};
+
+const foodMenusByFood = ({commit},slug) => {
+    commit("setFoodMenus",[[],true]);
+    return axiosClient.get(`/food-menus/${slug}`).then(({data})=>{
         commit("setFoodMenus",[data,false]);
 
         return data;
@@ -57,6 +68,5 @@ export {
     user,
     foods,
     foodMenus,
-
-
+    foodMenusByFood
 }

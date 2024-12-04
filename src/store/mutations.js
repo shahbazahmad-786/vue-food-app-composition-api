@@ -26,5 +26,5 @@ export {
     setUser,
     setToken,
     setFoods,
-   setFoodMenus,
+    setFoodMenus,
 }

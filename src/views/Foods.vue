@@ -19,14 +19,13 @@ onMounted(() => store.dispatch("foodMenus"));
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
 
-            <!-- Corrected v-for loop -->
-            <template v-for="foodMenu in foodMenus.data" :key="foodMenu.id">
+            <template  v-for="{id,src,title,details,price} in foodMenus.data">
                 <FoodMenu 
-                    :src="foodMenu.src"  
-                    :title="foodMenu.title"
-                    :details="foodMenu.details"
-                    :id="foodMenu.id"
-                    :price="foodMenu.price"
+                    :src="src"  
+                    :title="title"
+                    :details="details"
+                    :id="id"
+                    :price="price"
                 />
             </template>
 
