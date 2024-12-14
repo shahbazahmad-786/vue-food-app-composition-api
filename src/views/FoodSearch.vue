@@ -2,26 +2,35 @@
 import FoodMenu from '@/components/FoodMenu.vue';
 import SearchBanner from '@/components/SearchBanner.vue';
 import { useRoute } from 'vue-router';
-import { ref,onMounted,provide } from 'vue';
+import { onMounted,computed } from 'vue';
+import store from '@/store';
+
+const foodMenus = computed(() => store.state.foodMenus);
+
 
 const route = useRoute();
 const search = route.params.search;
 
-const foodMenus = ref([]);
-
-const fetchFoodMenus = async () => {
-    try {
-        const response = await fetch('../../db/food-menu.json');
-        const data = await response.json();
-        foodMenus.value = data;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-onMounted(() => {
-  fetchFoodMenus();
+onMounted(() =>{
+    store.dispatch("foodMenus");
+    store.dispatch("foodMenusBySearch", search);
 });
+
+// const foodMenus = ref([]);
+
+// const fetchFoodMenus = async () => {
+//     try {
+//         const response = await fetch('../../db/food-menu.json');
+//         const data = await response.json();
+//         foodMenus.value = data;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
+
+// onMounted(() => {
+//   fetchFoodMenus();
+// });
 </script>
 
 <template>
@@ -41,9 +50,10 @@ onMounted(() => {
     <!-- fOOD MEnu Section Starts Here -->
     <section class="food-menu">
         <div class="container">
-            <h2 class="text-center">Food Menu</h2>
+            <h2 class="text-center">Food Menu <span v-if="search" >for"{{ search }}"</span> </h2>
 
-            <template  v-for="{id,src,title,detail,price} in foodMenus">
+            <template v-if="!foodMenus.loading && foodMenus.data.length > 0">
+            <template  v-for="{id,src,title,detail,price} in foodMenus.data">
                 <FoodMenu 
                     :src="src"  
                     :title="title"
@@ -52,8 +62,9 @@ onMounted(() => {
                     :price="price"
                 />
             </template>
-
-
+        </template>
+        <p v-else-if="!foodMenus.loading" >No results found.</p>
+        <loader v-if="foodMenus.loading" style="margin-top: 80px;" />
             <div class="clearfix"></div>
 
             

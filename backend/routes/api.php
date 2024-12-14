@@ -5,21 +5,24 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\FoodMenuController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 
 // Auth
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function () {
+ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'getUser']);
 
     // Foods
     Route::post('/foods', [FoodController::class, 'create']);
     Route::get('/foods', [FoodController::class, 'index']);
-    Route::get('/food-menus/{id}', [FoodController::class, 'foodMenusByFood']);
+    Route::get('/food-menus/{slug}', [FoodController::class, 'foodMenusByFood']);
 
     // Food-Menu
     Route::post('/food-menues', [FoodMenuController::class, 'create']);
     Route::get('/food-menues', [FoodMenuController::class, 'index']);
+    Route::get('/food-menus', [FoodMenuController::class, 'search']);
+    Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 });

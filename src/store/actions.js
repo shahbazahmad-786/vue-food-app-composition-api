@@ -61,6 +61,36 @@ const foodMenusByFood = ({commit},slug) => {
     });
 };
 
+
+const foodMenusBySearch = ({ commit }, search) => {
+    commit("setFoodMenus", [[], true]); // Reset foodMenus while loading
+    return axiosClient
+   .get(`/food-menus/${search}`) // Check the API URL
+        .then(({ data }) => {
+            commit("setFoodMenus", [data, false]);
+            return data;
+        })
+        .catch(() => {
+            commit("setFoodMenus", [[], false]); // Handle errors
+});
+};
+export const submitOrder = async ({ commit }, orderData) => {
+    commit("SET_LOADING", true);
+    commit("SET_ERROR", null);
+
+    try {
+        const response = await axiosClient.post("/order", orderData);
+        commit("ADD_ORDER", response.data.order); // Add the new order to the state
+        alert("Order placed successfully!");
+    } catch (error) {
+        const errorMessage = error.response?.data?.message || "Failed to place order.";
+        commit("SET_ERROR", errorMessage);
+        console.error("Error placing order:", error);
+        alert(errorMessage);
+    } finally {
+        commit("SET_LOADING", false);
+    }
+};
 export {
     register,
     login,
@@ -68,5 +98,6 @@ export {
     user,
     foods,
     foodMenus,
-    foodMenusByFood
+    foodMenusByFood,
+    foodMenusBySearch
 }

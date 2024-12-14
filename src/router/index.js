@@ -39,12 +39,18 @@ const routes = [
                 component: Foods,
                 meta:{title:"Foods"}
             },
-            { 
+            {
                 path: '/order/:id',
-                name:'Order',
+                name: 'Order',
                 component: Order,
-                meta:{title:"Order"}
-            },
+                meta:{title:"Order"},
+                props: route => ({
+                    id: route.params.id,
+                    title: route.params.title,
+                    details: route.params.details,
+                    price: route.params.price,
+                }),
+                },
             { 
                 path: '/categories-foods/:slug',
                 name:'CategoriesFoods',

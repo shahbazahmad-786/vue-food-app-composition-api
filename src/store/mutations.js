@@ -22,6 +22,18 @@ const setFoodMenus = (state,[data,loading]) => {
     state.foodMenus.loading = loading;
 }; 
 
+export const SET_LOADING = (state, loading) => {
+    state.loading = loading;
+};
+
+export const SET_ERROR = (state, error) => {
+    state.error = error;
+};
+
+export const ADD_ORDER = (state, order) => {
+    state.orders.push(order);
+};
+
 export {
     setUser,
     setToken,

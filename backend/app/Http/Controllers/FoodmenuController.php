@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\FoodMenue;
+use Illuminate\Support\Facades\Log;
 
 class FoodMenuController extends Controller
 {
@@ -42,4 +43,19 @@ class FoodMenuController extends Controller
 
         return response()->json($food, 201);
     }
+    public function search(Request $request)
+{
+    $query = FoodMenue::query();
+
+    if ($request->has('search')) {
+        $searchValue = $request->search;
+        Log::info('Search value: ' . $searchValue); // Log the search query
+        $query->where('title', 'like', '%' . trim(strtolower($request->search)) . '%');
+    }
+
+    $results = $query->get();
+    Log::info('Query results: ' . $results);
+
+    return response()->json($results);
+}
 }

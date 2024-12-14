@@ -15,12 +15,15 @@
 
 <script setup>
 import router from '@/router';
+import store from '@/store';
 import { ref } from 'vue';
 
 const search = ref('');
 
 const submit = () => {
+    store.dispatch("foodMenusBySearch",search.value).then(() =>{
     router.push({name:'FoodSearch',params:{search:search.value}});
+    });
 };
 
 const vFocus = {

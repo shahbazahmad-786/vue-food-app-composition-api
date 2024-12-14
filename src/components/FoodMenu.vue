@@ -20,7 +20,16 @@ const props = defineProps({
                     <p class="food-detail">{{ details }}</p>
                     <br>
 
-                    <router-link :to="{name:'Order',params:{id:id}}" class="btn btn-primary">Order Now</router-link>
+                    <router-link 
+                        :to="{
+                            name: 'Order',
+                            params: { id },
+                            query: { src, title, details, price }
+                        }" 
+                        class="btn btn-primary"
+                    >
+                        Order Now
+                </router-link>
                 </div>
             </div>
 </template>
